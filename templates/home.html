@@ -1,36 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <title>My Portfolio</title>
-</head>
-<body>
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/projects">Projects</a>
-            <a href="/skills">Skills</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>About Me</h2>
-            <p>Hi! I'm Amir, a developer passionate about coding and technology. I love building web applications and exploring new programming languages.</p>
-        </section>
-        <section>
-            <h2>Featured Projects</h2>
-            <ul>
-                <li><a href="/projects">Check out my work!</a></li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>© 2026 Dylan. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+{{ define "content" }}
+<article>
+  <h1>Dylan</h1>
+  <p class="lede">
+    Incoming PhD student at the University of Illinois Urbana-Champaign,
+    studying Computer Science with a focus on Computer Architecture.
+  </p>
+
+  <p>
+    I am interested in the boundary between hardware and software: how
+    architectures shape the systems and tools we build, and how those tools
+    shape the way we think. I am an avid terminal user and care a lot about
+    minimal, composable, text-driven workflows.
+  </p>
+
+  <h2>Recent</h2>
+  <ul>
+    <li><a href="/projects">Projects</a> — current and past work.</li>
+    <li><a href="/skills">Skills</a> — languages and topics I work with.</li>
+    <li><a href="/about">About</a> — a longer introduction.</li>
+    <li><a href="/contact">Contact</a> — how to reach me.</li>
+  </ul>
+</article>
+{{ end }}

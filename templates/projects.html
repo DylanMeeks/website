@@ -1,37 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <title>Projects</title>
-</head>
-<body>
-    <header>
-        <h1>My Projects</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/projects">Projects</a>
-            <a href="/skills">Skills</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>Project 1: Portfolio Website</h2>
-            <p>A personal portfolio website to showcase my work and skills.</p>
-            <a href="#">View Project</a>
-        </section>
-        <section>
-            <h2>Project 2: Task Manager</h2>
-            <p>A simple web app to help users manage their daily tasks efficiently.</p>
-            <a href="#">View Project</a>
-        </section>
-        <!-- Add more projects as needed -->
-    </main>
-    <footer>
-        <p>© 2026 Dylan. All rights reserved.</p>
-    </footer>
-</body>
-</html>
+{{ define "content" }}
+<article>
+  <h1>Projects</h1>
+
+  <section class="entry">
+    <h2>Personal website</h2>
+    <p class="meta">Go, HTML, CSS, vanilla JS</p>
+    <p>
+      A minimal, document-style personal site served via Go templates. The goal
+      is to keep the markup simple enough that it stays fun to edit.
+    </p>
+    <p><a href="#">Source</a></p>
+  </section>
+
+  <section class="entry">
+    <h2>More coming soon</h2>
+    <p class="meta">draft</p>
+    <p>Placeholder for future projects in architecture, systems, and tooling.</p>
+  </section>
+</article>
+{{ end }}

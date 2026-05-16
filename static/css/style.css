@@ -1,83 +1,231 @@
+:root {
+  --fg: #e4e4ef;
+  --fg-plus-1: #f4f4ff;
+  --fg-plus-2: #f5f5f5;
+  --white: #ffffff;
+  --black: #000000;
+
+  --bg-minus-1: #101010;
+  --bg: #181818;
+  --bg-plus-1: #282828;
+  --bg-plus-2: #453d41;
+  --bg-plus-3: #484848;
+  --bg-plus-4: #52494e;
+  --bg-soft: #1f1f1f;
+
+  --red-minus-1: #c73c3f;
+  --red: #f43841;
+  --red-plus-1: #ff4f58;
+
+  --green: #73c936;
+  --yellow: #ffdd33;
+  --brown: #cc8c3c;
+  --quartz: #95a99f;
+  --niagara-minus-2: #303540;
+  --niagara-minus-1: #565f73;
+  --niagara: #96a6c8;
+  --wisteria: #9e95c7;
+
+  --rule: #303030;
+  --border: var(--bg-plus-3);
+  --panel: var(--bg-plus-1);
+  --panel-light: var(--bg-plus-2);
+  --text: var(--fg);
+  --muted: var(--quartz);
+  --accent: var(--green);
+  --link: var(--niagara);
+  --link-hover: var(--yellow);
+  --warn: var(--brown);
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+  margin: 0;
+  padding: 0;
 }
 
-header {
-    background: #032d58;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "CaskaydiaCove Nerd Font", "Cascadia Code", "JetBrains Mono",
+    "Fira Code", ui-monospace, Menlo, Consolas, monospace;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-nav a {
-    margin: 0 15px;
-    color: white;
-    text-decoration: none;
+.wrap {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-title {
+  color: var(--fg-plus-1);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.site-title::before {
+  content: "~/";
+  color: var(--accent);
+  margin-right: 0.15rem;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.nav a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--link-hover);
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 1.25rem 0 2rem;
 }
 
 main {
-    padding: 20px;
-}
-/* Add this to your existing style.css file */
-
-
-.form-group {
-    margin-bottom: 15px; /* Space between fields */
+  margin-top: 0.5rem;
 }
 
-.form-group label {
-    display: block; /* Make label block-level for stacking */
-    margin-bottom: 5px; /* Space between label and input */
-    font-weight: bold; /* Make the label bold */
+article > * + * {
+  margin-top: 1rem;
 }
 
-input[type="text"],
-input[type="email"],
-textarea {
-    width: 100%; /* Full width of the parent */
-    padding: 10px; /* Space inside the input fields */
-    border: 1px solid #ccc; /* Border color */
-    border-radius: 5px; /* Rounded corners */
+h1,
+h2,
+h3 {
+  color: var(--fg-plus-1);
+  line-height: 1.25;
+  margin: 2rem 0 0.5rem;
 }
 
-button {
-    background-color: #007bff; /* Button background color */
-    color: white; /* Button text color */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 15px; /* Padding inside the button */
-    cursor: pointer; /* Change cursor on hover */
+h1 {
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
 }
 
-button:hover {
-    background-color: #0056b3; /* Darker background on hover */
+h1::before {
+  content: "# ";
+  color: var(--accent);
+}
+
+h2 {
+  font-size: 1.15rem;
+}
+
+h2::before {
+  content: "## ";
+  color: var(--accent);
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+h3::before {
+  content: "### ";
+  color: var(--accent);
+}
+
+p,
+ul,
+ol {
+  margin: 0.75rem 0;
+}
+
+ul,
+ol {
+  padding-left: 1.25rem;
+}
+
+li {
+  margin: 0.2rem 0;
+}
+
+.lede {
+  color: var(--fg-plus-1);
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: -0.25rem;
+}
+
+.entry {
+  margin: 2rem 0;
+}
+
+code,
+pre {
+  font-family: inherit;
+  background: var(--bg-soft);
+}
+
+code {
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
+}
+
+pre {
+  padding: 0.85rem 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
 }
 
 footer {
-    background-color: #032d58; /* Light background color */
-    padding: 20px; /* Space around the content */
-    color:#f4f4f4;
-    text-align: center; /* Center text */
-    position: relative; /* Ensures footer is positioned relative to its parent */
-    bottom: 0; /* Stick to the bottom of the page */
-    width: 100%; /* Full width */
-    border-top: 1px solid #dee2e6; /* Top border for separation */
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 footer p {
-    margin: 0; /* Remove default margin */
-    font-size: 16px; /* Font size */
+  margin: 0;
 }
 
-footer a {
-    color: #007bff; /* Link color */
-    text-decoration: none; /* Remove underline */
-}
+@media (max-width: 480px) {
+  .wrap {
+    padding: 1.5rem 1rem 3rem;
+  }
 
-footer a:hover {
-    text-decoration: underline; /* Underline on hover */
+  .masthead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 }
