@@ -38,7 +38,6 @@
   --warn: var(--brown);
 }
 
-
 * {
   box-sizing: border-box;
 }
@@ -54,16 +53,94 @@ body {
   color: var(--fg);
   font-family: "CaskaydiaCove Nerd Font", "Cascadia Code", "JetBrains Mono",
     "Fira Code", ui-monospace, Menlo, Consolas, monospace;
-  font-size: 16px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-.wrap {
-  max-width: 42rem;
+.man {
+  max-width: 78ch;
   margin: 0 auto;
-  padding: 2.5rem 1.25rem 4rem;
+  padding: 1.5rem 1.25rem 2rem;
+}
+
+.man-head,
+.man-foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border-bottom: 1px dashed var(--rule);
+  padding: 0.4rem 0;
+}
+
+.man-foot {
+  border-top: 1px dashed var(--rule);
+  border-bottom: none;
+  margin-top: 2.5rem;
+}
+
+.man-head .left,
+.man-foot .left {
+  text-align: left;
+}
+
+.man-head .center,
+.man-foot .center {
+  text-align: center;
+}
+
+.man-head .right,
+.man-foot .right {
+  text-align: right;
+}
+
+main {
+  margin-top: 1.25rem;
+}
+
+section {
+  margin: 1.5rem 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--fg-plus-1);
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+h3 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.indent {
+  padding-left: 4ch;
+}
+
+p {
+  margin: 0.4rem 0;
+}
+
+b,
+strong {
+  color: var(--fg-plus-1);
+  font-weight: 700;
 }
 
 a {
@@ -77,118 +154,27 @@ a:hover {
   color: var(--link-hover);
 }
 
-.masthead {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.site-title {
-  color: var(--fg-plus-1);
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.site-title::before {
-  content: "~/";
-  color: var(--accent);
-  margin-right: 0.15rem;
-}
-
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.nav a {
-  color: var(--fg);
-  text-decoration: none;
-}
-
-.nav a:hover {
-  color: var(--link-hover);
-}
-
-.rule {
-  border: none;
-  border-top: 1px solid var(--rule);
-  margin: 1.25rem 0 2rem;
-}
-
-main {
-  margin-top: 0.5rem;
-}
-
-article > * + * {
-  margin-top: 1rem;
-}
-
-h1,
-h2,
-h3 {
-  color: var(--fg-plus-1);
-  line-height: 1.25;
-  margin: 2rem 0 0.5rem;
-}
-
-h1 {
-  font-size: 1.5rem;
-  letter-spacing: -0.01em;
-}
-
-h1::before {
-  content: "# ";
-  color: var(--accent);
-}
-
-h2 {
-  font-size: 1.15rem;
-}
-
-h2::before {
-  content: "## ";
-  color: var(--accent);
-}
-
-h3 {
-  font-size: 1rem;
-}
-
-h3::before {
-  content: "### ";
-  color: var(--accent);
-}
-
-p,
 ul,
 ol {
-  margin: 0.75rem 0;
-}
-
-ul,
-ol {
-  padding-left: 1.25rem;
+  margin: 0.4rem 0;
+  padding-left: 2ch;
 }
 
 li {
-  margin: 0.2rem 0;
+  margin: 0.15rem 0;
 }
 
-.lede {
+dl {
+  margin: 0.4rem 0;
+}
+
+dt {
+  margin-top: 0.6rem;
   color: var(--fg-plus-1);
 }
 
-.meta {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-top: -0.25rem;
-}
-
-.entry {
-  margin: 2rem 0;
+dd {
+  margin: 0 0 0.2rem 4ch;
 }
 
 code,
@@ -198,34 +184,39 @@ pre {
 }
 
 code {
-  padding: 0.05rem 0.3rem;
-  border-radius: 3px;
+  padding: 0 0.25rem;
+  border-radius: 2px;
 }
 
 pre {
-  padding: 0.85rem 1rem;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
   overflow-x: auto;
   border: 1px solid var(--rule);
+  border-radius: 2px;
+  margin: 0.6rem 0;
 }
 
-footer {
-  color: var(--muted);
-  font-size: 0.9rem;
+::selection {
+  background: var(--accent);
+  color: #000;
 }
 
-footer p {
-  margin: 0;
-}
-
-@media (max-width: 480px) {
-  .wrap {
-    padding: 1.5rem 1rem 3rem;
+@media (max-width: 560px) {
+  .man {
+    padding: 1rem 0.9rem 1.5rem;
   }
 
-  .masthead {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .indent {
+    padding-left: 2ch;
+  }
+
+  dd {
+    margin-left: 2ch;
+  }
+
+  .man-head,
+  .man-foot {
+    font-size: 0.75rem;
   }
 }
+

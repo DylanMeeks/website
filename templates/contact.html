@@ -1,13 +1,31 @@
 {{ define "content" }}
-<article>
-  <h1>Contact</h1>
+<section>
+  <h2>NAME</h2>
+  <div class="indent">
+    <p>contact — how to reach dylan</p>
+  </div>
+</section>
 
-  <p>The best way to reach me is by email.</p>
+<section>
+  <h2>CHANNELS</h2>
+  <div class="indent">
+    <dl>
+      <dt><b>email</b></dt>
+      <dd><a href="mailto:you@example.com">you@example.com</a></dd>
 
-  <ul>
-    <li>Email: <a href="mailto:you@example.com">you@example.com</a></li>
-    <li>GitHub: <a href="#">github.com/yourusername</a></li>
-    <li>LinkedIn: <a href="#">linkedin.com/in/yourusername</a></li>
-  </ul>
-</article>
+      <dt><b>github</b></dt>
+      <dd><a href="#">github.com/yourusername</a></dd>
+
+      <dt><b>linkedin</b></dt>
+      <dd><a href="#">linkedin.com/in/yourusername</a></dd>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <h2>BUGS</h2>
+  <div class="indent">
+    <p>Report site issues to the email above.</p>
+  </div>
+</section>
 {{ end }}

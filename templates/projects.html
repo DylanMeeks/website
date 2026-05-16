@@ -1,21 +1,43 @@
 {{ define "content" }}
-<article>
-  <h1>Projects</h1>
+<section>
+  <h2>NAME</h2>
+  <div class="indent">
+    <p>projects — things dylan has built or is building</p>
+  </div>
+</section>
 
-  <section class="entry">
-    <h2>Personal website</h2>
-    <p class="meta">Go, HTML, CSS, vanilla JS</p>
+<section>
+  <h2>DESCRIPTION</h2>
+  <div class="indent">
     <p>
-      A minimal, document-style personal site served via Go templates. The goal
-      is to keep the markup simple enough that it stays fun to edit.
+      A non-exhaustive list of projects, in no particular order. Each entry
+      includes a short summary and, where available, a link to source.
     </p>
-    <p><a href="#">Source</a></p>
-  </section>
+  </div>
+</section>
 
-  <section class="entry">
-    <h2>More coming soon</h2>
-    <p class="meta">draft</p>
-    <p>Placeholder for future projects in architecture, systems, and tooling.</p>
-  </section>
-</article>
+<section>
+  <h2>ENTRIES</h2>
+  <div class="indent">
+    <dl>
+      <dt><b>personal-site</b>(1)</dt>
+      <dd>
+        A man-page styled personal website. Served by Go using
+        <b>html/template</b>; static assets in vanilla HTML and CSS.
+        <br />
+        <a href="#">source</a>
+      </dd>
+
+      <dt><b>tbd</b>(1)</dt>
+      <dd>Placeholder for future work in architecture, systems, and tooling.</dd>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <h2>SEE ALSO</h2>
+  <div class="indent">
+    <p><a href="/">dylan</a>(1), <a href="/skills">skills</a>(1)</p>
+  </div>
+</section>
 {{ end }}

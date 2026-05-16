@@ -5,31 +5,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/static/css/style.css" />
-  <title>{{ .Title }} | Dylan</title>
+  <title>{{ .Title }}(1)</title>
 </head>
 <body>
-  <div class="wrap">
-    <header class="masthead">
-      <a href="/" class="site-title">dylan</a>
-      <nav class="nav">
-        <a href="/">home</a>
-        <a href="/projects">projects</a>
-        <a href="/skills">skills</a>
-        <a href="/about">about</a>
-        <a href="/contact">contact</a>
-      </nav>
+  <div class="man">
+    <header class="man-head" aria-hidden="true">
+      <span class="left">{{ .ManName }}({{ .ManSection }})</span>
+      <span class="center">{{ .ManVolume }}</span>
+      <span class="right">{{ .ManName }}({{ .ManSection }})</span>
     </header>
-
-    <hr class="rule" />
 
     <main>
       {{ template "content" . }}
     </main>
 
-    <hr class="rule" />
-
-    <footer>
-      <p>© 2026 Dylan</p>
+    <footer class="man-foot" aria-hidden="true">
+      <span class="left">{{ .ManSource }}</span>
+      <span class="center">{{ .ManDate }}</span>
+      <span class="right">{{ .ManName }}({{ .ManSection }})</span>
     </footer>
   </div>
 </body>
