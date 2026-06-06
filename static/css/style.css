@@ -33,7 +33,7 @@
   --text: var(--fg);
   --muted: var(--quartz);
   --accent: var(--green);
-  --link: var(--niagara);
+  --link: var(--quartz);
   --link-hover: var(--yellow);
   --warn: var(--brown);
 }
@@ -49,20 +49,21 @@ body {
 }
 
 body {
+  min-height: 100vh;
   background: var(--bg);
   color: var(--fg);
   font-family: "CaskaydiaCove Nerd Font", "Cascadia Code", "JetBrains Mono",
     "Fira Code", ui-monospace, Menlo, Consolas, monospace;
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 16px;
+  line-height: 1.28;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 .man {
-  max-width: 78ch;
+  width: min(100%, 96ch);
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 2rem;
+  padding: 0 0 1.5rem;
 }
 
 .man-head,
@@ -70,18 +71,29 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  color: var(--muted);
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  border-bottom: 1px dashed var(--rule);
-  padding: 0.4rem 0;
+
+  background: var(--bg-plus-1);
+  color: var(--quartz);
+
+  border: none;
+  padding: 0 0.15rem;
+
+  font-size: 1rem;
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.man-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: inset 0 -1px 0 var(--bg-minus-1);
 }
 
 .man-foot {
-  border-top: 1px dashed var(--rule);
-  border-bottom: none;
-  margin-top: 2.5rem;
+  margin-top: 2rem;
+  box-shadow: inset 0 1px 0 var(--bg-minus-1);
 }
 
 .man-head .left,
@@ -100,81 +112,84 @@ body {
 }
 
 main {
-  margin-top: 1.25rem;
+  margin: 0;
+  padding: 0.75rem 0 0;
 }
 
 section {
-  margin: 1.5rem 0;
+  margin: 0 0 1.15rem;
 }
 
 h1,
 h2,
 h3 {
-  color: var(--fg-plus-1);
-  font-weight: 700;
-  margin: 0 0 0.4rem;
+  margin: 0;
   line-height: 1.2;
+  font-weight: 800;
 }
 
 h2 {
+  color: var(--yellow);
   font-size: 1rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0;
 }
 
 h3 {
+  color: var(--yellow);
   font-size: 0.95rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--accent);
+  letter-spacing: 0;
 }
 
 .indent {
-  padding-left: 4ch;
+  padding-left: 7ch;
 }
 
 p {
-  margin: 0.4rem 0;
+  margin: 0.2rem 0;
 }
 
 b,
 strong {
   color: var(--fg-plus-1);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 a {
   color: var(--link);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  text-underline-offset: 2px;
 }
 
-a:hover {
+a:hover,
+a:focus {
   color: var(--link-hover);
 }
 
 ul,
 ol {
-  margin: 0.4rem 0;
+  margin: 0.2rem 0;
   padding-left: 2ch;
 }
 
 li {
-  margin: 0.15rem 0;
+  margin: 0.1rem 0;
 }
 
 dl {
-  margin: 0.4rem 0;
+  margin: 0;
 }
 
 dt {
-  margin-top: 0.6rem;
-  color: var(--fg-plus-1);
+  margin-top: 0.8rem;
+  color: var(--fg);
 }
 
 dd {
-  margin: 0 0 0.2rem 4ch;
+  margin: 0.05rem 0 0.25rem 7ch;
+  color: var(--fg);
 }
 
 code,
@@ -189,34 +204,63 @@ code {
 }
 
 pre {
+  margin: 0.6rem 0;
   padding: 0.75rem 1rem;
   overflow-x: auto;
   border: 1px solid var(--rule);
   border-radius: 2px;
-  margin: 0.6rem 0;
+}
+
+/* Blog listing metadata */
+.post-date,
+.post-flag {
+  color: var(--quartz);
+}
+
+.post-tags {
+  color: var(--brown);
+}
+
+.post-section {
+  color: var(--fg);
+}
+
+dt b a {
+  color: var(--green);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+dt b a:hover,
+dt b a:focus {
+  color: var(--yellow);
+  text-decoration: underline;
 }
 
 ::selection {
-  background: var(--accent);
-  color: #000;
+  background: var(--yellow);
+  color: var(--black);
 }
 
-@media (max-width: 560px) {
+@media (max-width: 700px) {
+  body {
+    font-size: 14px;
+  }
+
   .man {
-    padding: 1rem 0.9rem 1.5rem;
+    width: 100%;
   }
 
   .indent {
-    padding-left: 2ch;
+    padding-left: 3ch;
   }
 
   dd {
-    margin-left: 2ch;
+    margin-left: 3ch;
   }
 
   .man-head,
   .man-foot {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 }
-
