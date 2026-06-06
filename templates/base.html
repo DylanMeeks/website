@@ -1,31 +1,29 @@
 {{ define "base" }}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/static/css/style.css" />
-  <script src="static/js/link-interaction.js" defer></script>
-  <title>{{ .Title }}(1)</title>
-</head>
-<body>
-  <div class="man">
-    <header class="man-head" aria-hidden="true">
-      <span class="left">{{ .ManName }}({{ .ManSection }})</span>
-      <span class="center">{{ .ManVolume }}</span>
-      <span class="right">{{ .ManName }}({{ .ManSection }})</span>
-    </header>
-
-    <main>
-      {{ template "content" . }}
-    </main>
-
-    <footer class="man-foot" aria-hidden="true">
-      <span class="left">{{ .ManSource }}</span>
-      <span class="center">{{ .ManDate }}</span>
-      <span class="right">{{ .ManName }}({{ .ManSection }})</span>
-    </footer>
-  </div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/static/css/style.css" />
+        <script src="static/js/link-interaction.js" defer></script>
+        <title>{{ .Title }}(1)</title>
+    </head>
+    <body>
+        <div class="man">
+            <header class="man-head" aria-hidden="true">
+                <span class="left">{{ .ManName }}({{ .ManSection }})</span>
+                <span class="center">{{ .ManVolume }}</span>
+                <span class="right">{{ .ManName }}({{ .ManSection }})</span>
+            </header>
+            <main>
+                {{ template "content" . }}
+            </main>
+            <footer class="man-foot" aria-hidden="true">
+                <span class="left">{{ .ManSource }}</span>
+                <span class="center">{{ .ManDate }}</span>
+                <span class="right">{{ .ManName }}({{ .ManSection }})</span>
+            </footer>
+        </div>
+    </body>
 </html>
 {{ end }}
