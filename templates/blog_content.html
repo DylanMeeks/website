@@ -1,0 +1,29 @@
+{{ define "blog_content" }}
+<section>
+    <h2>NAME</h2>
+    <div class="indent">
+        <p>{{ .Title }}</p>
+    </div>
+</section>
+<section>
+    <h2>Description</h2>
+    <div class="indent">{{ .Desc }}</div>
+</section>
+<section>
+    <h2>CONTENT</h2>
+    <div class="indent">{{ .Content }}</div>
+</section>
+<section>
+    <h2>BUGS</h2>
+    <div class="indent">
+        <p>Send any feedback to site at this domain. I look forward to hearing your thoughts.</p>
+    </div>
+</section>
+<section>
+    <h2>SEE ALSO</h2>
+    <div class="indent">
+        <p><a href="/">Dylan</a>(1)</p>
+        <p><a href="/blog">blog</a>(1)</p>
+    </div>
+</section>
+{{ end }}

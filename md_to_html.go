@@ -74,7 +74,7 @@ func newCustomizedRender() *mdhtml.Renderer {
 	return mdhtml.NewRenderer(opts)
 }
 
-func MdToHtml(md []byte) []byte {
+func MdToHTML(md []byte) []byte {
 
 	renderer := newCustomizedRender()
 	html := markdown.ToHTML(md, nil, renderer)

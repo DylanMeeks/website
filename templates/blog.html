@@ -1,0 +1,41 @@
+{{ define "content" }}
+<section>
+    <h2>NAME</h2>
+    <div class="indent">
+        <p>blogs — my writings, some of it may be useful</p>
+    </div>
+</section>
+<section>
+    <h2>POSTS</h2>
+    <div class="indent">
+        <dl>
+            {{ range .Posts }}
+            <dt>
+                <b><a href="/blog/{{ index .Tags "Title" }}">{{ index .Tags "Title" }}</a></b><span class="post-section">(2)</span>
+                <span class="post-flag">--date</span>
+                <span class="post-date">{{ index .Tags "Date" }}</span>
+                {{ range $k, $v := (filterTags .Tags) }}
+                <span class="post-flag">--{{ toLower $k }}</span>
+                <span class="post-tags">[{{ $v }}]</span>
+                {{ end }}
+            </dt>
+            <dd>
+                {{ index .Tags "Desc" }}
+            </dd>
+            {{ end }}
+        </dl>
+    </div>
+</section>
+<section>
+    <h2>SEE ALSO</h2>
+    <div class="indent">
+        <p>
+            <a href="/">Dylan</a>(1),
+            <a href="/projects">projects</a>(1),
+            <a href="/skills">skills</a>(1),
+            <a href="/about">about</a>(1),
+            <a href="/contact">contact</a>(1)
+        </p>
+    </div>
+</section>
+{{ end }}
