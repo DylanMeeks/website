@@ -16,7 +16,7 @@
                 <span class="post-date">{{ index .Tags "Date" }}</span>
                 {{ range $k, $v := (filterTags .Tags) }}
                 <span class="post-flag">--{{ toLower $k }}</span>
-                <span class="post-tags">[{{ $v }}]</span>
+                <span class="post-flag">[</span><span class="post-tags">{{ $v }}</span><span class="post-flag">]</span>
                 {{ end }}
             </dt>
             <dd>

@@ -212,8 +212,11 @@ pre {
 }
 
 /* Blog listing metadata */
-.post-date,
 .post-flag {
+  color: var(--niagara-minus-1);
+}
+
+.post-date {
   color: var(--quartz);
 }
 
@@ -237,8 +240,12 @@ dt b a:focus {
   text-decoration: underline;
 }
 
+/* ::selection { */
+/*   background: var(--yellow); */
+/*   color: var(--black); */
+/* } */
 ::selection {
-  background: var(--yellow);
+  background: var(--niagara);
   color: var(--black);
 }
 
