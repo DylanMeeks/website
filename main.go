@@ -58,15 +58,18 @@ func parsePostDate(s string) time.Time {
 }
 
 func generateRSS(posts []blogData) ([]byte, error) {
-	now := time.Now()
+	updated := time.Now()
+	if len(posts) > 0 {
+		updated = parsePostDate(posts[0].Tags["Date"])
+	}
 
 	feed := &feeds.Feed{
 		Title:       "Dylan's Blog",
 		Link:        &feeds.Link{Href: siteURL + "/blog"},
 		Description: "Posts from Dylan's personal website",
 		Author:      &feeds.Author{Name: "Dylan Meeks"},
-		Created:     now,
-		Updated:     now,
+		Created:     updated,
+		Updated:     updated,
 	}
 
 	for _, post := range posts {
