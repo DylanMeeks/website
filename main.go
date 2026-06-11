@@ -199,7 +199,7 @@ func main() {
 	http.HandleFunc("/blog/", blogPostHandler)
 	http.HandleFunc("/rss.xml", rssHandler)
 
-	fmt.Println("Server running on http://localhost:8090")
+	fmt.Println("Server running on http://127.0.0.1:8090")
 	log.Fatal(http.ListenAndServe("127.0.0.1:8090", nil))
 }
 
