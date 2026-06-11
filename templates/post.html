@@ -1,4 +1,5 @@
 {{ define "content" }}
+{{ $postInfo := getPost .Posts .Title }}
 <section>
     <h2>NAME</h2>
     <div class="indent">
@@ -7,11 +8,11 @@
 </section>
 <section>
     <h2>Description</h2>
-    <div class="indent">{{ .Desc }}</div>
+    <div class="indent">{{ index $postInfo.Tags "Desc" }}</div>
 </section>
 <section>
     <h2>CONTENT</h2>
-    <div class="indent">{{ .Content }}</div>
+    <div class="indent">{{ $postInfo.Content }}</div>
 </section>
 <section>
     <h2>BUGS</h2>
@@ -22,8 +23,7 @@
 <section>
     <h2>SEE ALSO</h2>
     <div class="indent">
-        <p><a href="/">Dylan</a>(1)</p>
-        <p><a href="/blog">blog</a>(1)</p>
+        <p><a href="/">Dylan</a>(1), <a href="/blog">blog</a>(1)</p>
     </div>
 </section>
 {{ end }}

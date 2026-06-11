@@ -38,17 +38,7 @@ func newPage(name, title, section string) pageData {
 
 type blogData struct {
 	Tags    map[string]string
-	Content string
-}
-
-func filterTags(tags map[string]string) map[string]string {
-	newTags := maps.Clone(tags)
-	for k, _ := range newTags {
-		if k == "Title" || k == "Date" || k == "Desc" {
-			delete(newTags, k)
-		}
-	}
-	return newTags
+	Content template.HTML
 }
 
 var Posts []blogData
@@ -69,6 +59,7 @@ func genBlogs() ([]blogData, error) {
 		}
 		defer f.Close()
 
+		// start parsing custom tag fields
 		reader := bufio.NewReader(f)
 		start, err := reader.ReadBytes('\n')
 		if err != nil {
@@ -90,14 +81,27 @@ func genBlogs() ([]blogData, error) {
 			tags[strings.Trim(strs[0], " \n")] = strings.Trim(strs[1], " \n")
 		}
 
+		// render rest of the file as the blog
 		buf := make([]byte, 1024*516)
 		_, err = reader.Read(buf)
 		if err != nil && err != io.EOF {
 			return nil, fmt.Errorf("failed to read 'content' from file %s into buffer", e.Name())
 		}
 		contentHTML := MdToHTML([]byte(buf))
-		blogs = append(blogs, blogData{tags, string(contentHTML)})
+		blogs = append(blogs, blogData{tags, template.HTML(contentHTML)})
 	}
+
+	// write CSS generated for blogs
+	f, err := os.Create("static/css/chroma.css")
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	if err := WriteHighlightCSS(f); err != nil {
+		panic(err)
+	}
+
 	return blogs, nil
 }
 
@@ -120,9 +124,29 @@ func main() {
 	http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/contact", contactHandler)
 	http.HandleFunc("/blog", blogHandler)
+	http.HandleFunc("/blog/", blogPostHandler)
 
 	fmt.Println("Server running on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func filterTags(tags map[string]string) map[string]string {
+	newTags := maps.Clone(tags)
+	for k := range newTags {
+		if k == "Title" || k == "Date" || k == "Desc" {
+			delete(newTags, k)
+		}
+	}
+	return newTags
+}
+
+func getPost(posts []blogData, title string) blogData {
+	for _, post := range posts {
+		if title == post.Tags["Title"] {
+			return post
+		}
+	}
+	return blogData{}
 }
 
 func renderTemplate(w http.ResponseWriter, page string, data pageData) {
@@ -134,6 +158,7 @@ func renderTemplate(w http.ResponseWriter, page string, data pageData) {
 	tmpl, err := template.New("").Funcs(template.FuncMap{
 		"filterTags": filterTags,
 		"toLower":    strings.ToLower,
+		"getPost":    getPost,
 	}).ParseFiles(files...)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -170,4 +195,23 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 
 func blogHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "blog.html", newPage("BLOG", "blog", "1"))
+}
+
+func blogPostHandler(w http.ResponseWriter, r *http.Request) {
+	slug := strings.TrimPrefix(r.URL.Path, "/blog/")
+	slug = strings.Trim(slug, "/")
+
+	exists := false
+	for _, post := range Posts {
+		if slug == post.Tags["Title"] {
+			exists = true
+			break
+		}
+	}
+	if !exists {
+		http.NotFound(w, r)
+		return
+	}
+
+	renderTemplate(w, "post.html", newPage("BLOG", slug, "2"))
 }
