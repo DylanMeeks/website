@@ -200,7 +200,7 @@ func main() {
 	http.HandleFunc("/rss.xml", rssHandler)
 
 	fmt.Println("Server running on http://localhost:8090")
-	log.Fatal(http.ListenAndServe(":8090", nil))
+	log.Fatal(http.ListenAndServe("127.0.0.1:8090", nil))
 }
 
 func filterTags(tags map[string]string) map[string]string {
