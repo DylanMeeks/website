@@ -12,6 +12,9 @@ import (
 	"path/filepath"
 	"slices"
 	"strings"
+	"time"
+
+	"github.com/gorilla/feeds"
 )
 
 type pageData struct {
@@ -42,6 +45,68 @@ type blogData struct {
 }
 
 var Posts []blogData
+var RSSFeed []byte
+
+const siteURL = "https://dylanmeeks.engineer"
+
+func parsePostDate(s string) time.Time {
+	t, err := time.Parse("2006-01-02", s)
+	if err != nil {
+		return time.Now()
+	}
+	return t
+}
+
+func generateRSS(posts []blogData) ([]byte, error) {
+	now := time.Now()
+
+	feed := &feeds.Feed{
+		Title:       "Dylan's Blog",
+		Link:        &feeds.Link{Href: siteURL + "/blog"},
+		Description: "Posts from Dylan's personal website",
+		Author:      &feeds.Author{Name: "Dylan Meeks"},
+		Created:     now,
+		Updated:     now,
+	}
+
+	for _, post := range posts {
+		title := post.Tags["Title"]
+		desc := post.Tags["Desc"]
+		date := parsePostDate(post.Tags["Date"])
+
+		url := siteURL + "/blog/" + title
+
+		feed.Items = append(feed.Items, &feeds.Item{
+			Title:       title,
+			Link:        &feeds.Link{Href: url},
+			Description: desc,
+			Created:     date,
+			Updated:     date,
+			Content:     string(post.Content),
+		})
+	}
+
+	gen, err := feed.ToRss()
+	if err != nil {
+		return nil, err
+	}
+	return []byte(gen), nil
+}
+
+func sortBlogs(blogs []blogData) []blogData {
+	slices.SortFunc(blogs, func(a, b blogData) int {
+		aTime := parsePostDate(a.Tags["Date"])
+		bTime := parsePostDate(b.Tags["Date"])
+		if aTime.Before(bTime) {
+			return 1
+		} else if bTime.Before(aTime) {
+			return -1
+		} else {
+			return 0
+		}
+	})
+	return blogs
+}
 
 func genBlogs() ([]blogData, error) {
 	dir, err := os.ReadDir("content")
@@ -91,6 +156,8 @@ func genBlogs() ([]blogData, error) {
 		blogs = append(blogs, blogData{tags, template.HTML(contentHTML)})
 	}
 
+	blogs = sortBlogs(blogs)
+
 	// write CSS generated for blogs
 	f, err := os.Create("static/css/chroma.css")
 	if err != nil {
@@ -113,6 +180,11 @@ func main() {
 		log.Fatal(err)
 	}
 
+	RSSFeed, err = generateRSS(Posts)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	http.Handle(
 		"/static/",
 		http.StripPrefix("/static/", http.FileServer(http.Dir("static/"))),
@@ -125,6 +197,7 @@ func main() {
 	http.HandleFunc("/contact", contactHandler)
 	http.HandleFunc("/blog", blogHandler)
 	http.HandleFunc("/blog/", blogPostHandler)
+	http.HandleFunc("/rss.xml", rssHandler)
 
 	fmt.Println("Server running on http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
@@ -214,4 +287,10 @@ func blogPostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	renderTemplate(w, "post.html", newPage("BLOG", slug, "2"))
+}
+
+func rssHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/rss+xml; charset=utf-8")
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write(RSSFeed)
 }
