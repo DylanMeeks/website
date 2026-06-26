@@ -201,6 +201,7 @@ func main() {
 	http.HandleFunc("/blog", blogHandler)
 	http.HandleFunc("/blog/", blogPostHandler)
 	http.HandleFunc("/rss.xml", rssHandler)
+	http.HandleFunc("/resume", resumeHandler)
 
 	fmt.Println("Server running on http://127.0.0.1:8090")
 	log.Fatal(http.ListenAndServe("127.0.0.1:8090", nil))
@@ -296,4 +297,13 @@ func rssHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/rss+xml; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
 	_, _ = w.Write(RSSFeed)
+}
+
+func resumeHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/resume" {
+		http.NotFound(w, r)
+		return
+	}
+
+	http.ServeFile(w, r, "static/pdf/resume/resume.pdf")
 }

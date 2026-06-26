@@ -1,0 +1,3 @@
+[submodule "static/pdf/resume"]
+	path = static/pdf/resume
+	url = https://github.com/DylanMeeks/Resume.git
